@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataVIZZ — Demo Day Guide</title>
+<style>
+  :root {
+    --nurettin: #8E24AA;
+    --arda:     #1E88E5;
+    --yusuf:    #43A047;
+    --bg:       #FAFAFA;
+    --card:     #FFFFFF;
+    --border:   #E0E0E0;
+    --text:     #212121;
+    --muted:    #616161;
+    --code-bg:  #2D2D2D;
+    --code-fg:  #F8F8F2;
+    --note-bg:  #FFF8E1;
+    --note-bd:  #FFB300;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.6; max-width: 1100px;
+    margin: 0 auto; padding: 30px 40px 80px;
+    font-size: 15px;
+  }
+  h1 { font-size: 32px; margin-bottom: 4px; border-bottom: 3px solid var(--nurettin); padding-bottom: 10px; }
+  h1 + .subtitle { color: var(--muted); font-size: 16px; margin-bottom: 30px; }
+  h2 {
+    font-size: 24px; margin-top: 50px; margin-bottom: 16px;
+    padding: 13px 18px; background: var(--text); color: white; border-radius: 6px;
+  }
+  h3 { font-size: 19px; margin-top: 26px; margin-bottom: 10px; }
+  h4 { font-size: 12px; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
+
+  .block {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 18px 22px; margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  }
+  .block-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 14px;
+  }
+  .block-title { font-size: 17px; font-weight: 600; }
+  .duration { font-size: 13px; color: var(--muted); background: #F5F5F5; padding: 4px 10px; border-radius: 12px; }
+
+  .badge {
+    display: inline-block; padding: 3px 12px; border-radius: 12px;
+    font-size: 13px; font-weight: 600; color: white; margin-right: 6px;
+  }
+  .nurettin { background: var(--nurettin); }
+  .arda     { background: var(--arda); }
+  .yusuf    { background: var(--yusuf); }
+
+  .say {
+    background: #F3E5F5; border-left: 4px solid var(--nurettin);
+    padding: 12px 16px; margin: 10px 0; border-radius: 0 6px 6px 0; font-size: 15px;
+  }
+  .say.arda  { background: #E3F2FD; border-left-color: var(--arda); }
+  .say.yusuf { background: #E8F5E9; border-left-color: var(--yusuf); }
+
+  .do {
+    font-style: italic; color: var(--muted); background: #F5F5F5;
+    padding: 8px 14px; margin: 10px 0; border-radius: 4px; font-size: 14px;
+  }
+  .do::before { content: "🎬 "; }
+
+  .screen {
+    background: #E3F2FD; border: 1px dashed #1976D2;
+    padding: 10px 14px; margin: 10px 0; border-radius: 4px; font-size: 14px; color: #0D47A1;
+  }
+  .screen::before { content: "🖥️ You should see: "; font-weight: 700; }
+
+  .click {
+    background: #E8F5E9; border: 1px dashed #388E3C;
+    padding: 10px 14px; margin: 10px 0; border-radius: 4px; font-size: 14px; color: #1B5E20;
+  }
+  .click::before { content: "🖱️ Click / Action: "; font-weight: 700; }
+
+  .note {
+    background: var(--note-bg); border-left: 4px solid var(--note-bd);
+    padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; font-size: 14px;
+  }
+  .note::before { content: "💡 "; font-weight: bold; }
+  .warn {
+    background: #FFEBEE; border-left: 4px solid #E53935;
+    padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; font-size: 14px;
+  }
+  .warn::before { content: "⚠️ "; font-weight: bold; }
+
+  code { background: #F0F0F0; padding: 1px 6px; border-radius: 3px; color: #C62828; font-size: 13px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  pre {
+    background: var(--code-bg); color: var(--code-fg);
+    padding: 12px 16px; border-radius: 6px; overflow-x: auto; margin: 10px 0;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13px;
+  }
+  pre code { background: none; color: var(--code-fg); padding: 0; }
+
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px 24px; margin-bottom: 30px; }
+  .toc h3 { margin-top: 0; }
+  .toc ul { padding-left: 20px; margin: 0; }
+  .toc li { margin: 6px 0; }
+  .toc a { color: var(--nurettin); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 20px 0; }
+  .summary-card {
+    background: var(--card); border: 2px solid var(--border);
+    border-radius: 10px; padding: 16px;
+  }
+  .summary-card .name { font-size: 19px; font-weight: bold; margin-bottom: 4px; }
+  .summary-card .time { font-size: 26px; font-weight: bold; margin: 6px 0; }
+  .summary-card .section { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-top: 10px; color: var(--muted); }
+  .summary-card .lbl { font-size: 12px; color: var(--text); line-height: 1.6; }
+
+  .timeline { display: flex; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); height: 40px; margin: 16px 0; }
+  .tl { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: white; }
+
+  /* Section banners */
+  .section-banner {
+    display: flex; align-items: center; gap: 14px; margin: 36px 0 18px;
+  }
+  .section-banner .pill {
+    font-size: 13px; font-weight: 700; color: white; padding: 5px 14px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .section-banner .line { flex: 1; height: 2px; background: var(--border); }
+
+  hr { border: none; border-top: 2px dashed var(--border); margin: 30px 0; }
+  @media print {
+    body { max-width: 100%; padding: 20px; }
+    h2 { page-break-before: always; }
+    h2:first-of-type { page-break-before: avoid; }
+    .block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🏀 DataVIZZ — Demo Day Guide</h1>
+<p class="subtitle">YZV475E Data Visualization · <strong>15 min total: 10 min presentation → demo · 5 min Q&amp;A</strong><br>
+All slides first, then all demo tabs. Two separate parts.</p>
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ul>
+    <li><a href="#prep">0. Before You Start — Checklist</a></li>
+    <li><a href="#part1">PART 1 — Presentation (Slides, ~6 min)</a>
+      <ul>
+        <li><a href="#n-slides">Nurettin — Slides 1–4 (~2:00)</a></li>
+        <li><a href="#a-slides">Mehmet Arda — Slides 5–7 (~2:00)</a></li>
+        <li><a href="#y-slides">Yusuf — Slides 8–13 (~2:00)</a></li>
+      </ul>
+    </li>
+    <li><a href="#part2">PART 2 — Live Demo (Dashboard, ~4 min)</a>
+      <ul>
+        <li><a href="#n-demo">Nurettin — Tab 1 (~1:20)</a></li>
+        <li><a href="#a-demo">Mehmet Arda — Tabs 2 &amp; 3 (~1:20)</a></li>
+        <li><a href="#y-demo">Yusuf — Tabs 4 &amp; 5 (~1:20)</a></li>
+      </ul>
+    </li>
+    <li><a href="#qa">Q&amp;A — 5 min</a></li>
+    <li><a href="#fallback">Fallback Plans</a></li>
+  </ul>
+</div>
+
+<!-- Timeline -->
+<div style="margin:16px 0 4px; font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.5px;">Total 15 minutes</div>
+<div class="timeline">
+  <div class="tl" style="width:13%;background:var(--nurettin)">N · 2:00</div>
+  <div class="tl" style="width:13%;background:var(--arda)">A · 2:00</div>
+  <div class="tl" style="width:13%;background:var(--yusuf)">Y · 2:00</div>
+  <div class="tl" style="width:9%;background:var(--nurettin);opacity:.75">N · 1:20</div>
+  <div class="tl" style="width:9%;background:var(--arda);opacity:.75">A · 1:20</div>
+  <div class="tl" style="width:9%;background:var(--yusuf);opacity:.75">Y · 1:20</div>
+  <div class="tl" style="width:34%;background:#455A64">Q&amp;A · 5:00</div>
+</div>
+<div style="display:flex;gap:20px;font-size:12px;color:var(--muted);margin-bottom:20px;">
+  <span>■ Solid = Presentation</span>
+  <span>■ Faded = Demo</span>
+</div>
+
+<div class="summary">
+  <div class="summary-card" style="border-color:var(--nurettin)">
+    <div class="name" style="color:var(--nurettin)">Nurettin</div>
+    <div class="time" style="color:var(--nurettin)">2:00 + 1:20</div>
+    <div class="section">Slides (2:00)</div>
+    <div class="lbl">
+      1 · Title<br>
+      2 · Agenda<br>
+      3 · Dataset &amp; Motivation<br>
+      4 · RQ1: Three-Point Revolution
+    </div>
+    <div class="section">Demo (1:20)</div>
+    <div class="lbl">Tab 1 — Three-Point charts</div>
+  </div>
+  <div class="summary-card" style="border-color:var(--arda)">
+    <div class="name" style="color:var(--arda)">Mehmet Arda</div>
+    <div class="time" style="color:var(--arda)">2:00 + 1:20</div>
+    <div class="section">Slides (2:00)</div>
+    <div class="lbl">
+      5 · RQ1: Scoring &amp; Pace<br>
+      6 · RQ2: Physical vs Performance<br>
+      7 · RQ3: Career Arc &amp; Peak Age
+    </div>
+    <div class="section">Demo (1:20)</div>
+    <div class="lbl">Tab 2 — Scatter + trendline<br>Tab 3 — Career arc chart</div>
+  </div>
+  <div class="summary-card" style="border-color:var(--yusuf)">
+    <div class="name" style="color:var(--yusuf)">Yusuf</div>
+    <div class="time" style="color:var(--yusuf)">2:00 + 1:20</div>
+    <div class="section">Slides (2:00)</div>
+    <div class="lbl">
+      8–9 · RQ4: Geography<br>
+      10 · RQ5: Position Profiles<br>
+      11 · Technical Implementation<br>
+      12–13 · Conclusion + Thank You
+    </div>
+    <div class="section">Demo (1:20)</div>
+    <div class="lbl">Tab 4 — World map + US map<br>Tab 5 — Heatmap + radar chart</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     0. CHECKLIST
+══════════════════════════════════════ -->
+<h2 id="prep">0. Before You Start</h2>
+<p>Do this <b>10 minutes before</b> you go to the front.</p>
+
+<div class="block">
+  <h3>Start the app</h3>
+  <pre><code>cd "C:\Users\NURETTİN\OneDrive\Masaüstü\datavizprop"
+streamlit run app.py</code></pre>
+  <div class="screen">Browser opens at http://localhost:8501. You see the title "NBA Statistics Dashboard" and 5 tabs.</div>
+  <div class="warn">Keep the terminal open the whole time. If you press Ctrl+C, the app stops.</div>
+</div>
+
+<div class="block">
+  <h3>Pre-load all 5 tabs — click each one now</h3>
+  <ul>
+    <li><b>Tab 1 📈</b> — set slider to 1979–2024. All 3 charts must be visible.</li>
+    <li><b>Tab 2 💪</b> — X: Height (cm), Y: Points per game. Scatter with red trendline.</li>
+    <li><b>Tab 3 📊</b> — all 3 stats selected (Points, Assists, Rebounds).</li>
+    <li><b>Tab 4 🌍</b> — world map must be fully loaded. <em>This can take 2–3 seconds the first time.</em></li>
+    <li><b>Tab 5 🏃</b> — all 5 positions selected, Era = All. Heatmap and radar chart visible.</li>
+  </ul>
+  <div class="note">Tab 4 is the most important one to pre-load. If you open it for the first time during the demo, the map might be blank for a few seconds.</div>
+</div>
+
+<div class="block">
+  <h3>Computer setup</h3>
+  <ul>
+    <li>Charger plugged in</li>
+    <li>Do Not Disturb / Focus Mode ON</li>
+    <li>Only terminal + browser open — close everything else</li>
+    <li>Browser zoom 110–125%, full screen (F11)</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════
+     PART 1 — PRESENTATION
+══════════════════════════════════════ -->
+<h2 id="part1">PART 1 — Presentation (~6 min)</h2>
+<p>All 13 slides, one after the other. No demo yet — that comes after. Each person speaks for about <b>2 minutes</b>.</p>
+
+<!-- ── NURETTIN SLIDES ── -->
+<div class="section-banner" id="n-slides">
+  <div class="pill" style="background:var(--nurettin)">Nurettin · Slides 1–4 · ~2:00</div>
+  <div class="line"></div>
+</div>
+<div class="note">NBA knowledge is your advantage here. Use it. Slides 3 and 4 need context that only someone who follows basketball can give well.</div>
+<div class="do">You are at the front. Slide 1 is on the screen.</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge nurettin">Nurettin</span> Slide 1 — Title</div>
+    <span class="duration">~15 sec</span>
+  </div>
+  <div class="say">
+    "Hello everyone. We are <b>DataVIZZ</b>. Our project is an interactive dashboard about 80 years of NBA data. I'm Nurettin, this is Mehmet Arda, and Yusuf."
+  </div>
+  <div class="do">Go to Slide 2.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge nurettin">Nurettin</span> Slide 2 — Agenda</div>
+    <span class="duration">~15 sec</span>
+  </div>
+  <div class="say">
+    "I'll cover the dataset and the three-point revolution. Then Mehmet Arda continues with physical attributes and career data. Yusuf finishes with geography, positions, and the conclusion. After all the slides, we'll show the dashboard live."
+  </div>
+  <div class="do">Go to Slide 3.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge nurettin">Nurettin</span> Slide 3 — Dataset &amp; Motivation</div>
+    <span class="duration">~65 sec</span>
+  </div>
+  <div class="say">
+    "Why the NBA? Because basketball is one of the few sports where every single play has been recorded and published since the very first season in 1947. Other sports have gaps in their historical data. The NBA does not.<br><br>
+    Our main dataset comes from Basketball Reference — the gold standard for basketball statistics. It has <b>22 CSV files, 33 thousand rows, and 11 megabytes</b> of data. It covers the NBA, the ABA, and the early BAA, all the way from 1947 to 2024.<br><br>
+    We also used two extra datasets: one for player <b>country, height, and weight</b> from 1996 to 2023, and one for <b>U.S. birth state</b> data covering all of history.<br><br>
+    We chose the NBA because the game has changed completely over 80 years. New rules changed strategy. Analytics changed how teams build rosters. More and more players came from other countries. Each of our five research questions looks at one part of this transformation."
+  </div>
+  <div class="do">Go to Slide 4.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge nurettin">Nurettin</span> Slide 4 — RQ1: Three-Point Revolution</div>
+    <span class="duration">~65 sec</span>
+  </div>
+  <div class="say">
+    "RQ1 — how did the three-point shot change the game?<br><br>
+    Before 1979, there was no three-point line in the NBA. Teams could only score 2 points on a field goal, no matter where they shot from. The ABA had a three-point rule before the NBA — the NBA finally added it in the <b>1979–80 season</b>. At first, nobody used it much. In year one, teams took only <b>3.1 three-pointers per game</b>.<br><br>
+    Then something changed. In 1994, the league moved the line closer for three seasons — and you can see a spike in the data. Then in <b>2015–16</b>, the Golden State Warriors used analytics to prove that a good three-pointer is worth more than a good mid-range two. Every team saw the numbers and changed how they played. Since then, the growth is almost vertical. By 2024, teams take <b>35.6 three-pointers per game</b> — that is 11 times more than in 1980. Today, nearly 40% of all shots in the NBA are three-pointers."
+  </div>
+  <div class="do">Go to Slide 5. <b>Mehmet Arda comes to the front.</b></div>
+</div>
+
+<!-- ── MEHMET ARDA SLIDES ── -->
+<div class="section-banner" id="a-slides">
+  <div class="pill" style="background:var(--arda)">Mehmet Arda · Slides 5–7 · ~2:00</div>
+  <div class="line"></div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge arda">Mehmet Arda</span> Slide 5 — RQ1: Scoring &amp; Pace Over Time</div>
+    <span class="duration">~35 sec</span>
+  </div>
+  <div class="say arda">
+    "Thanks Nurettin. This slide shows what happened to team scoring and pace at the same time as the three-point explosion.<br><br>
+    In the 1990s and early 2000s, scoring was low — teams played slow, defensive basketball. Then it went up steadily to a record of about <b>113 points per game in 2024</b>. Pace shows the same pattern: slow through the 90s, then faster again in the modern era. More three-pointers means more open space, which means more possessions and more scoring."
+  </div>
+  <div class="do">Go to Slide 6.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge arda">Mehmet Arda</span> Slide 6 — RQ2: Physical Attributes vs Performance</div>
+    <span class="duration">~55 sec</span>
+  </div>
+  <div class="say arda">
+    "RQ2 — does height or weight predict how good a player is?<br><br>
+    We used 12,844 player-seasons from 1996 to 2023, representing 82 countries. We compared height and weight against four performance stats: points per game, Win Shares, Player Efficiency Rating, and Box Plus/Minus. The scatter plot uses an OLS trendline to show the direction of the relationship.<br><br>
+    The result for height vs. points: there is a small negative connection. Taller players score fewer points on average — not because they are worse, but because big players give value through rebounds and defense, not scoring. If you look at Win Shares instead, the trendline is almost flat. Height helps your team win, just in a different way than scoring.<br><br>
+    Weight shows almost no connection with any stat. The NBA works for many different body types."
+  </div>
+  <div class="do">Go to Slide 7.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge arda">Mehmet Arda</span> Slide 7 — RQ3: Career Arc &amp; Peak Age</div>
+    <span class="duration">~50 sec</span>
+  </div>
+  <div class="say arda">
+    "RQ3 — at what age do players reach their best?<br><br>
+    We used all player data from 1947 to 2024, keeping only seasons with at least 20 games played. Then we grouped all players by age and calculated the average stats. The result is a career arc — a line that shows how a typical NBA player develops.<br><br>
+    Scoring peaks at <b>age 26–27</b>. Assists peak a little earlier, at 24–25. Rebounds peak around 25–26. These numbers are consistent across all eras.<br><br>
+    After age 32, much fewer players are still active. After 35, only the very best players remain — so the average stats look a little high at older ages. This is called survivorship bias. We include a bar chart showing the number of players at each age, so you can see exactly where the data gets thin."
+  </div>
+  <div class="do">Go to Slide 8. <b>Yusuf comes to the front.</b></div>
+</div>
+
+<!-- ── YUSUF SLIDES ── -->
+<div class="section-banner" id="y-slides">
+  <div class="pill" style="background:var(--yusuf)">Yusuf · Slides 8–13 · ~2:00</div>
+  <div class="line"></div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge yusuf">Yusuf</span> Slides 8–9 — RQ4: Geography</div>
+    <span class="duration">~45 sec</span>
+  </div>
+  <div class="say yusuf">
+    "Thanks Mehmet Arda. RQ4 — where do NBA players come from?<br><br>
+    Our world map uses data from 1996 to 2023. The USA is by far the biggest source, with over 10,000 player-seasons. But there are players from <b>82 different countries</b>. The top non-U.S. countries are Canada, France, Australia, and Spain. The number of international players grew a lot after 2000 and is still growing.<br><br>
+    Inside the USA, the second map shows which state each player was born in. California, New York, and Texas are at the top. Southern states like Georgia and North Carolina are also very high — they have strong college basketball programs that send many players directly into the NBA draft."
+  </div>
+  <div class="do">Go to Slide 10.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge yusuf">Yusuf</span> Slide 10 — RQ5: Position Profiles</div>
+    <span class="duration">~45 sec</span>
+  </div>
+  <div class="say yusuf">
+    "RQ5 — how are the five positions different?<br><br>
+    We combined per-game stats and advanced metrics for all seasons and built three charts: a heatmap, a box plot, and a radar chart. All stats are normalized from 0 to 1 so they are easy to compare.<br><br>
+    The pattern is clear. <b>Point guards lead in assists and three-point shooting.</b> <b>Centers lead in blocks and rebounds.</b> Small forwards have the most balanced profile — they are strong in many different areas.<br><br>
+    The era filter shows something interesting: in the modern era, the center's three-point percentage goes up a lot. Thirty years ago, centers almost never shot threes. Today, many do. The positions are slowly becoming more similar."
+  </div>
+  <div class="do">Go to Slide 11.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge yusuf">Yusuf</span> Slide 11 — Technical Implementation</div>
+    <span class="duration">~20 sec</span>
+  </div>
+  <div class="say yusuf">
+    "The dashboard runs on <b>Streamlit</b> with Python 3.10. All charts use <b>Plotly</b> for interactive hover, zoom, and filter. Data is cached so switching tabs is fast. It starts with one command: <code>streamlit run app.py</code>."
+  </div>
+  <div class="do">Go to Slide 12.</div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge yusuf">Yusuf</span> Slides 12–13 — Conclusion + Thank You</div>
+    <span class="duration">~35 sec</span>
+  </div>
+  <div class="say yusuf">
+    "To close — five questions, five answers. Three-pointers grew 11 times since 1979 and changed the whole game. Height and weight have only a small effect on scoring. Players peak at 26–27. NBA talent now comes from 82 countries. And position roles are getting more similar in the modern era.<br><br>
+    That is our presentation. Now we will show you everything live in the dashboard."
+  </div>
+  <div class="do">Keep slides open or minimize — go to the browser. <b>Nurettin comes back to the front to start the demo.</b></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PART 2 — LIVE DEMO
+══════════════════════════════════════ -->
+<h2 id="part2">PART 2 — Live Demo (~4 min)</h2>
+<p>All slides are done. Now each person shows their tabs. Keep it short — each person has about <b>1 minute 20 seconds</b>. The goal is to show the interactivity, not repeat everything from the slides.</p>
+<div class="warn">Browser must already be at http://localhost:8501 — app must be running. Do not start the app now, it should already be open from the checklist.</div>
+
+<!-- ── NURETTIN DEMO ── -->
+<div class="section-banner" id="n-demo">
+  <div class="pill" style="background:var(--nurettin)">Nurettin · Tab 1 Demo · ~1:20</div>
+  <div class="line"></div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge nurettin">Nurettin</span> Tab 1 — Three-Point Revolution</div>
+    <span class="duration">~80 sec</span>
+  </div>
+  <div class="do">Click on Tab 1: 📈 Three-Point Revolution. Slider should already be at 1979–2024.</div>
+  <div class="screen">Area chart: 3-point attempts per game from 1979. Near zero at the start, big jump after 2015, reaching ~35 in 2024.</div>
+  <div class="say">
+    "This is Tab 1. The area chart shows team three-point attempts per game from 1979 to today. The slow start in the 1980s — then the big jump after 2015."
+  </div>
+
+  <div class="click">Hover over the 1995 spike. Then hover over 2024.</div>
+  <div class="screen">Tooltip: season and exact 3PA per game value (1994–95: ~15, 2023–24: ~35.6).</div>
+  <div class="say">
+    "I can hover over any point. Here in 1995, you can see the spike from when the line was moved closer. And in 2024, 35.6 attempts per game."
+  </div>
+
+  <div class="click">Scroll down to the dual-axis line chart.</div>
+  <div class="screen">Two lines: blue (team PPG) and red dotted (pace). Both go up in the modern era.</div>
+  <div class="say">
+    "Below that — team scoring and pace together. Both went up at the same time as three-point usage. More threes, faster game, more points."
+  </div>
+
+  <div class="click">Scroll down to show the three metric boxes at the bottom of Tab 1.</div>
+  <div class="say">
+    "And three numbers at the bottom summarize it: 35.6 team attempts per game, 39.6% of all shots, 11 times growth since 1980. Mehmet Arda."
+  </div>
+  <div class="do"><b>Mehmet Arda comes to the front.</b></div>
+</div>
+
+<!-- ── ARDA DEMO ── -->
+<div class="section-banner" id="a-demo">
+  <div class="pill" style="background:var(--arda)">Mehmet Arda · Tabs 2 &amp; 3 Demo · ~1:20</div>
+  <div class="line"></div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge arda">Mehmet Arda</span> Tab 2 — Physical vs Performance</div>
+    <span class="duration">~40 sec</span>
+  </div>
+  <div class="click">Click on Tab 2: 💪 Physical vs Performance. X = Height (cm), Y = Points per game.</div>
+  <div class="screen">Scatter plot: each dot is one player-season, colored by country. A red OLS trendline goes slightly downward from left to right.</div>
+  <div class="say arda">
+    "Tab 2. Each dot is a player season. X axis is height, Y axis is points per game. The red line goes down — taller players score less on average."
+  </div>
+
+  <div class="click">Hover over a guard (short, high scorer). Then hover over a center (tall, lower scorer).</div>
+  <div class="screen">Tooltip: player name, season, height in cm, points per game, country.</div>
+  <div class="say arda">
+    "If I hover, I see the exact player. Short guards at the top right — high scoring. Tall centers at the bottom right — fewer points but still great players."
+  </div>
+
+  <div class="click">Change the Y axis dropdown to "Win Shares".</div>
+  <div class="screen">Trendline becomes almost flat.</div>
+  <div class="say arda">
+    "Switch to Win Shares — the trendline flattens. Height helps teams win, just not through scoring."
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge arda">Mehmet Arda</span> Tab 3 — Career Arc &amp; Peak Age</div>
+    <span class="duration">~40 sec</span>
+  </div>
+  <div class="click">Click on Tab 3: 📊 Career Arc &amp; Peak Age.</div>
+  <div class="screen">Multi-line chart: blue (PPG), red (APG), green (RPG). Lines go up, peak around age 26–27, then go down. A blue info box shows the peak age.</div>
+  <div class="say arda">
+    "Tab 3. Three lines — points, assists, and rebounds by age. All peak around 26–27. The info box at the bottom calculates the peak age automatically."
+  </div>
+
+  <div class="click">Hover over the peak of the blue line (~age 26). Then hover over age 38.</div>
+  <div class="screen">Tooltip shows average PPG at that age.</div>
+  <div class="say arda">
+    "Peak at 26. At age 38, the numbers tick up again — that's survivorship bias, only the best players are still in the league. Yusuf."
+  </div>
+  <div class="do"><b>Yusuf comes to the front.</b></div>
+</div>
+
+<!-- ── YUSUF DEMO ── -->
+<div class="section-banner" id="y-demo">
+  <div class="pill" style="background:var(--yusuf)">Yusuf · Tabs 4 &amp; 5 Demo · ~1:20</div>
+  <div class="line"></div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge yusuf">Yusuf</span> Tab 4 — Geography</div>
+    <span class="duration">~40 sec</span>
+  </div>
+  <div class="click">Click on Tab 4: 🌍 Geography. Color by = "# of Players".</div>
+  <div class="screen">World choropleth map. USA is dark. Canada, France, Australia, Spain have medium color. Most other countries are light.</div>
+  <div class="say yusuf">
+    "Tab 4 — world map. Each country is colored by how many players it produced. Let me hover over a few."
+  </div>
+
+  <div class="click">Hover over France, Australia, Nigeria.</div>
+  <div class="screen">Tooltip: country, player count, average PPG / RPG / APG.</div>
+  <div class="say yusuf">
+    "Tooltip shows player count and average stats. Now let me switch to average points."
+  </div>
+
+  <div class="click">Click the "Avg Points" radio button.</div>
+  <div class="screen">Color pattern changes — some small countries become darker because their few players were very high quality.</div>
+  <div class="say yusuf">
+    "Different story — now we see which countries produced the best scorers, not just the most players."
+  </div>
+
+  <div class="click">Scroll down past the bar chart to the U.S. state choropleth.</div>
+  <div class="screen">USA map: California, New York, Texas darkest.</div>
+  <div class="say yusuf">
+    "And the U.S. state map — California, New York, Texas at the top. Southern states also very strong."
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-header">
+    <div class="block-title"><span class="badge yusuf">Yusuf</span> Tab 5 — Position Profiles</div>
+    <span class="duration">~40 sec</span>
+  </div>
+  <div class="click">Click on Tab 5: 🏃 Position Profiles. All 5 positions selected, Era = All.</div>
+  <div class="screen">Heatmap: 5 rows × 11 columns. PG row is green in assists. C row is green in blocks and rebounds.</div>
+  <div class="say yusuf">
+    "Tab 5 — heatmap of all positions against 11 stats. Point guards green in assists. Centers green in blocks. Let me change the era."
+  </div>
+
+  <div class="click">Change Era dropdown to "Current (2003–2024)".</div>
+  <div class="screen">Heatmap updates. The C row's 3P% column becomes noticeably greener.</div>
+  <div class="say yusuf">
+    "Modern era — the center row's three-point column gets greener. Modern centers shoot many more threes. Let me scroll down."
+  </div>
+
+  <div class="click">Scroll down to the radar chart.</div>
+  <div class="screen">5 colored radar shapes. PG has a sharp spike for assists. C is wide for blocks and rebounds. SF is the most round/balanced shape.</div>
+  <div class="say yusuf">
+    "The radar chart shows each position's shape. PG is a spike for assists. Center is wide for interior stats. Small forward is the most balanced. That's the full dashboard — we're happy to take questions."
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     Q&A
+══════════════════════════════════════ -->
+<h2 id="qa">Q&amp;A — 5 min</h2>
+<p>Possible questions. <b>Who answers</b> and <b>what to say.</b></p>
+
+<div class="block">
+  <h3>Q: "Why Streamlit? Why not Dash or a JavaScript framework?"</h3>
+  <p><span class="badge nurettin">Nurettin</span></p>
+  <div class="say">
+    "Streamlit is the right fit for this project. It is pure Python, needs very little extra code, and starts with one command. Dash gives more layout control but requires much more code for the same result. A JS framework like D3 would be too complex — the course is about data storytelling, not front-end development. Streamlit let us focus on the analysis."
+  </div>
+</div>
+
+<div class="block">
+  <h3>Q: "Why CSV files and not a database?"</h3>
+  <p><span class="badge nurettin">Nurettin</span></p>
+  <div class="say">
+    "With 33 thousand rows and 11 megabytes, a database adds setup complexity with no performance benefit. Pandas reads the files in under one second, and <code>@st.cache_data</code> means it only happens once per session. For production with millions of rows and many users, a database would be right. For this project, flat files are simpler and easier to run — the instructor needs only one command."
+  </div>
+</div>
+
+<div class="block">
+  <h3>Q: "Why team-level data for the three-point charts, not player-level?"</h3>
+  <p><span class="badge nurettin">Nurettin</span></p>
+  <div class="say">
+    "This was actually a bug we found early on. If you average three-point attempts across all individual players, you get about 2 or 3 — because many big men almost never shoot threes. That makes the growth look very small. The real question is: how many threes does a team take per game? That went from 3.1 to 35.6. Team-level data tells the true story."
+  </div>
+</div>
+
+<div class="block">
+  <h3>Q: "Is the trendline in Tab 2 statistically significant?"</h3>
+  <p><span class="badge arda">Mehmet Arda</span></p>
+  <div class="say arda">
+    "Yes — the p-value for height vs. points is well below 0.05, so the negative slope is statistically significant. But the R-squared is only about 0.04 to 0.06. This means height explains only 4 to 6 percent of the difference in scoring between players. The connection is real, but height is not a good predictor of how many points a player will score."
+  </div>
+</div>
+
+<div class="block">
+  <h3>Q: "Can you explain survivorship bias in more detail?"</h3>
+  <p><span class="badge arda">Mehmet Arda</span></p>
+  <div class="say arda">
+    "At age 38, the only players still in the league are exceptional — they lasted because they are uniquely skilled. A typical player retires by 33 or 34. So the average stats at age 38 are higher than normal, because we are only seeing the very best — not a typical 38-year-old player. The bar chart in Tab 3 makes this clear: the sample size at age 38 is much smaller than at age 26."
+  </div>
+</div>
+
+<div class="block">
+  <h3>Q: "The world map only goes to 2023. What about earlier international players?"</h3>
+  <p><span class="badge yusuf">Yusuf</span></p>
+  <div class="say yusuf">
+    "Before 1996, international players were very rare. The NBA's globalization really started in the 1990s. Starting from 1996 captures the entire important period. For the U.S. state data, we use a different all-time dataset that covers the full history — that is the second map in Tab 4."
+  </div>
+</div>
+
+<div class="block">
+  <h3>Q: "What would you add if you had more time?"</h3>
+  <p><span class="badge yusuf">Yusuf</span></p>
+  <div class="say yusuf">
+    "Three things. First, a player search — type a name and see their personal career arc compared to the league average. Second, a salary dataset — how do advanced stats connect to contract values? Third, shot zone charts from the Player Shooting CSV, which is in our dataset but unused. A shot chart per player or era would be a natural next step."
+  </div>
+</div>
+
+<div class="block">
+  <h3>Q: "How did you handle players who were traded mid-season?"</h3>
+  <p><span class="badge arda">Mehmet Arda</span></p>
+  <div class="say arda">
+    "Basketball Reference shows traded players more than once — once for each team. For per-game stats, we use each row separately. For advanced stats like Win Shares, we group by player and season — adding totals and averaging rates — so a traded player gets one combined number per season. The join with the physical dataset uses lowercase player name matching to handle small formatting differences."
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FALLBACK
+══════════════════════════════════════ -->
+<h2 id="fallback">Fallback Plans</h2>
+
+<div class="block">
+  <h3>🚨 App does not open / error in the browser</h3>
+  <pre><code>cd "C:\Users\NURETTİN\OneDrive\Masaüstü\datavizprop"
+pip install -r requirements.txt
+streamlit run app.py</code></pre>
+  <p>If it still fails: <b>stay calm.</b> Say <em>"Let me walk you through the code structure."</em> Open VS Code and show <code>data_loader.py</code> and one tab file. The slides already show all the charts — the live demo is a bonus.</p>
+</div>
+
+<div class="block">
+  <h3>🚨 Tab 4 map is empty or white</h3>
+  <p>Press F5 to refresh. Plotly choropleth sometimes does not render on the first load but always works on the second. While waiting, say: <em>"The map takes just a moment."</em> If it still fails, skip the world map and show only the bar chart in Tab 4.</p>
+</div>
+
+<div class="block">
+  <h3>🚨 "No module named statsmodels" error in Tab 2</h3>
+  <pre><code>C:\Users\NURETTİN\AppData\Local\Programs\Python\Python310\python.exe -m pip install statsmodels</code></pre>
+  <p>Then restart the terminal and run <code>streamlit run app.py</code> again.</p>
+</div>
+
+<div class="block">
+  <h3>🚨 Running out of time during the demo</h3>
+  <p><b>Must show:</b> Tab 1 area chart · Tab 2 scatter with trendline · Tab 4 world map<br>
+  <b>Can skip if needed:</b> Tab 3 bar chart · Tab 5 era filter · U.S. state map</p>
+</div>
+
+<div class="block">
+  <h3>🚨 You do not know the answer to a question</h3>
+  <div class="say">
+    "That is a really good question. I do not have a complete answer right now. My best guess is [your best guess], but I would want to check before I say it for sure. We can talk more after the session."
+  </div>
+  <p>Do not just say "I don't know." Always add a guess or an offer to follow up.</p>
+</div>
+
+<hr>
+<p style="text-align:center; color:var(--muted); font-size:14px; margin-top:40px;">
+  <b>DataVIZZ</b> · YZV475E Data Visualization · ITU Spring 2026<br>
+  Nurettin Macit · Mehmet Arda Öncel · Yusuf Oğuz
+</p>
+
+</body>
+</html>
