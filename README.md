@@ -1,43 +1,56 @@
-# DataVIZZ — NBA Statistics Dashboard (1947–2024)
+# DataVIZZ: NBA Statistics Dashboard (1947-2024)
 
-İTÜ YZV475E (Data Visualization) dönem projesi. 77 yıllık NBA tarihini kapsayan, **Streamlit ile geliştirilmiş interaktif bir web dashboard'u** — statik notebook grafiklerinin ötesinde, gerçekten çalıştırılabilir/deploy edilebilir bir uygulama.
+<details>
+<summary>🇹🇷 Türkçe özet için tıklayın</summary>
 
-## Ne Yapıyor
+77 yıllık NBA tarihini kapsayan, **Streamlit ile geliştirilmiş interaktif bir web dashboard'u**, statik notebook grafiklerinin ötesinde gerçekten çalıştırılabilir/deploy edilebilir bir uygulama.
 
-5 sekmeli, her biri farklı bir analiz açısına odaklanan bir NBA istatistik paneli:
+5 sekme: üçlük atışının NBA tarihi boyunca evrimi, fiziksel özellikler ile performans ilişkisi, oyuncuların kariyer eğrisi ve zirve yaptıkları yaş, oyuncuların doğum yeri (ülke haritası + ABD eyalet bazlı interaktif choropleth), pozisyona göre istatistiksel profil karşılaştırması.
 
-| Sekme | İçerik |
+`data/` altında 21 ayrı CSV dosyası (Basketball Reference kaynaklı): oyuncu bazlı per-game/per-100-possession/play-by-play istatistikleri, takım istatistikleri, draft geçmişi, ödül oylamaları, All-Star seçimleri. Ayrıca oyuncu doğum yerleri ve oyuncu profil verisi ayrı veri setleri olarak işlenmiş.
+
+Çalıştırmak için: `cd datavizprop && uv venv --python 3.12 && uv pip install -r requirements.txt && streamlit run app.py`
+
+</details>
+
+An interactive Streamlit dashboard covering 77 years of NBA history, a real deployable app rather than a set of static notebook charts.
+
+## What it does
+
+Five tabs, each covering a different angle on the data:
+
+| Tab | What's in it |
 |---|---|
-| 📈 **Three-Point Revolution** | Üçlük atışının NBA tarihi boyunca nasıl evrildiği |
-| 💪 **Physical vs Performance** | Fiziksel özellikler (boy, kilo) ile performans ilişkisi |
-| 📊 **Career Arc & Peak Age** | Oyuncuların kariyer eğrisi, zirve yaptıkları yaş |
-| 🌍 **Geography** | Oyuncuların doğum yeri — ülke bazlı dünya haritası + ABD eyalet bazlı choropleth (interaktif, Plotly) |
-| 🏃 **Position Profiles** | Pozisyona göre istatistiksel profil karşılaştırması |
+| Three-Point Revolution | How the three-point shot evolved across NBA history |
+| Physical vs Performance | How physical traits (height, weight) relate to performance |
+| Career Arc & Peak Age | Player career curves and the age they peak at |
+| Geography | Where players were born, a country-level world map plus an interactive US state-level choropleth built with Plotly |
+| Position Profiles | Statistical profile comparisons by position |
 
-## Veri
+## Data
 
-`data/` altında 21 ayrı CSV dosyası (Basketball Reference kaynaklı) — oyuncu bazlı per-game/per-100-possession/play-by-play istatistikleri, takım istatistikleri, draft geçmişi, ödül oylamaları, All-Star seçimleri. Ayrıca oyuncu doğum yerleri (`data_birthplaces/`) ve oyuncu profil verisi (`data_players/`) ayrı veri setleri olarak işlenmiş.
+21 separate CSV files under `data/`, sourced from Basketball Reference: per-game, per-100-possession, and play-by-play stats for individual players, team stats, draft history, award voting, All-Star selections. Player birthplaces and player profile data are processed as their own separate datasets.
 
-## Mimari
+## Architecture
 
 ```
 datavizprop/
-├── app.py                 # Streamlit giriş noktası — 5 sekmeyi bağlar
-├── data_loader.py          # Veri yükleme/önbellekleme katmanı
-├── tabs/                   # Her sekme kendi modülü (render() fonksiyonu ile)
+├── app.py                  Streamlit entry point, wires up the 5 tabs
+├── data_loader.py           Data loading and caching layer
+├── tabs/                    Each tab is its own module with a render() function
 │   ├── tab_threept.py
 │   ├── tab_physical.py
 │   ├── tab_career.py
 │   ├── tab_geo.py
 │   └── tab_positions.py
-├── data/ · data_birthplaces/ · data_players/   # Ham veri (CSV)
-├── figures/                # Rapor ve sunum için üretilmiş statik görseller
-├── report.pdf / report.tex   # Yazılı proje raporu
-├── presentation.pptx        # Sunum
-└── Project Proposal.pdf     # Başlangıç proje önerisi
+├── data/, data_birthplaces/, data_players/    Raw CSV data
+├── figures/                 Static figures generated for the report and presentation
+├── report.pdf / report.tex   Written project report
+├── presentation.pptx         Slide deck
+└── Project Proposal.pdf      The original project proposal
 ```
 
-## Çalıştırma
+## Running it
 
 ```bash
 cd datavizprop
@@ -45,6 +58,6 @@ uv venv --python 3.12 && uv pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Kullanılan Araçlar
+## Tools
 
-Streamlit (uygulama çatısı), Plotly (interaktif haritalar/grafikler), Pandas/NumPy (veri işleme), Matplotlib/Seaborn/Statsmodels (rapor için statik analiz).
+Streamlit for the app itself, Plotly for the interactive maps and charts, Pandas and NumPy for data handling, Matplotlib/Seaborn/Statsmodels for the static analysis in the written report.
