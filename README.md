@@ -13,6 +13,8 @@
 
 </details>
 
+---
+
 An interactive Streamlit dashboard covering 77 years of NBA history, a real deployable app rather than a set of static notebook charts.
 
 ## What it does
