@@ -3,7 +3,7 @@
 <details>
 <summary>🇹🇷 Türkçe özet için tıklayın</summary>
 
-77 yıllık NBA tarihini kapsayan, **Streamlit ile geliştirilmiş interaktif bir web dashboard'u**, statik notebook grafiklerinin ötesinde gerçekten çalıştırılabilir/deploy edilebilir bir uygulama.
+3 kişilik bir takım projesi (Nurettin Macit, Mehmet Arda Öncel, Yusuf Oğuz). 77 yıllık NBA tarihini kapsayan, **Streamlit ile geliştirilmiş interaktif bir web dashboard'u**, statik notebook grafiklerinin ötesinde gerçekten çalıştırılabilir/deploy edilebilir bir uygulama.
 
 5 sekme: üçlük atışının NBA tarihi boyunca evrimi, fiziksel özellikler ile performans ilişkisi, oyuncuların kariyer eğrisi ve zirve yaptıkları yaş, oyuncuların doğum yeri (ülke haritası + ABD eyalet bazlı interaktif choropleth), pozisyona göre istatistiksel profil karşılaştırması.
 
@@ -15,7 +15,7 @@
 
 ---
 
-An interactive Streamlit dashboard covering 77 years of NBA history, a real deployable app rather than a set of static notebook charts.
+A team project by Nurettin Macit, Mehmet Arda Öncel, and Yusuf Oğuz. An interactive Streamlit dashboard covering 77 years of NBA history, a real deployable app rather than a set of static notebook charts.
 
 ## What it does
 
@@ -47,8 +47,9 @@ datavizprop/
 │   └── tab_positions.py
 ├── data/, data_birthplaces/, data_players/    Raw CSV data
 ├── figures/                 Static figures generated for the report and presentation
-├── report.pdf / report.tex   Written project report
+├── report.pdf / report.tex   Written project report (IEEE conference paper format)
 ├── presentation.pptx         Slide deck
+├── demo_day_guide.html       Presenter's cue sheet for the live demo
 └── Project Proposal.pdf      The original project proposal
 ```
 

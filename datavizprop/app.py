@@ -9,7 +9,7 @@ st.set_page_config(
 from tabs import tab_threept, tab_physical, tab_career, tab_geo, tab_positions
 
 st.title("🏀 NBA Statistics Dashboard (1947–2024)")
-st.caption("DataVIZZ · YZV475E Data Visualization · ITU 2025–2026 Spring")
+st.caption("DataVIZZ · an interactive tour through 80 years of NBA history")
 
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📈 Three-Point Revolution",
