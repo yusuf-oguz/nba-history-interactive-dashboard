@@ -11,11 +11,15 @@
 
 Çalıştırmak için: `cd datavizprop && uv venv --python 3.12 && uv pip install -r requirements.txt && streamlit run app.py`
 
+**Kapsam:** NBA tarihi verisini interaktif olarak keşfeden kısa bir takım egzersizi, üretim ortamı için bir dashboard değil.
+
 </details>
 
 ---
 
 A team project by Nurettin Macit, Mehmet Arda Öncel, and Yusuf Oğuz. An interactive Streamlit dashboard covering 77 years of NBA history, a real deployable app rather than a set of static notebook charts.
+
+**Scope:** an interactive exploration of NBA history data, built as a short team exercise rather than a production dashboard.
 
 ## What it does
 
