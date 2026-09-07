@@ -1,5 +1,7 @@
 # DataVIZZ: NBA Statistics Dashboard (1947-2024)
 
+> **Small-scope project.** A short, focused exercise, not a large-scale build. For deeper work, see the [pinned repositories](https://github.com/yusuf-oguz).
+
 <details>
 <summary>🇹🇷 Türkçe özet için tıklayın</summary>
 
